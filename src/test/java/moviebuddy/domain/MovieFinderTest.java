@@ -17,26 +17,9 @@ import java.util.List;
  * @author springrunner.kr@gmail.com
  */
 @SpringJUnitConfig(MovieBuddyFactory.class)
-//@ExtendWith(SpringExtension.class)
-//@ContextConfiguration(classes = MovieBuddyFactory.class)
 public class MovieFinderTest {
-//	final ApplicationContext applicationContext =
-//			new AnnotationConfigApplicationContext(MovieBuddyFactory.class);
-//	final MovieFinder movieFinder = applicationContext.getBean(MovieFinder.class);
-
-
-//	final MovieFinder movieFinder;
-//	@Autowired
-//	public MovieFinderTest(MovieFinder movieFinder) {
-//		this.movieFinder = movieFinder;
-//	}
 
 	@Autowired MovieFinder movieFinder;
-//
-//	@Autowired
-//	void setMovieFinder(MovieFinder movieFinder) {
-//		this.movieFinder = movieFinder;
-//	}
 
 	@Test
 	void NotEmpty_directedBy() {
