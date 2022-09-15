@@ -5,9 +5,16 @@ import moviebuddy.MovieBuddyProfile;
 import moviebuddy.domain.Movie;
 import moviebuddy.domain.MovieReader;
 import moviebuddy.util.FileSystemUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,21 +30,7 @@ import java.util.stream.Collectors;
 
 @Profile(MovieBuddyProfile.CSV_MODE)
 @Repository
-public class CsvMovieReader implements MovieReader {
-    /**
-     * 영화 메타데이터를 읽어 저장된 영화 목록을 불러온다.
-     *
-     * @return 불러온 영화 목록
-     */
-    private String metadata;
-
-    public String getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(String metadata) {
-        this.metadata = Objects.requireNonNull(metadata, "metadata is required value");
-    }
+public class CsvMovieReader extends AbstractFileSystemMovieReader implements MovieReader {
 
     @Override
     public List<Movie> loadMovies() {
@@ -74,4 +67,5 @@ public class CsvMovieReader implements MovieReader {
             throw new ApplicationException("failed to load movies data.", error);
         }
     }
+
 }
